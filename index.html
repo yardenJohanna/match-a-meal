@@ -1,0 +1,168 @@
+﻿<!doctype html> <!-- הגדרת סוג המסמך כ־HTML5 -->
+<html lang="he"> <!-- שפת המסמך עברית -->
+<head>
+    <meta charset="utf-8" /> <!-- תמיכה בעברית -->
+    <title>מה אוכלים היום? - התאם לי ארוחה</title> <!-- כותרת בלשונית -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes"> <!-- התאמה לניידים -->
+    <link href="styles/myStyle.css" rel="stylesheet" /> <!-- קישור ל־CSS -->
+    <script defer src="jScripts/JavaScript.js"></script> <!-- קישור ל־JavaScript -->
+</head>
+<body dir="rtl"> <!-- גוף האתר, יישור מימין לשמאל -->
+<div id="container"> <!-- מיכל מרכזי -->
+    <main>
+        <!-- חלון קופץ לסיכום -->
+        <div id="matchSummaryFormContainer">
+            <div id="formContent">
+                <!-- כפתור X לסגירה -->
+                <span id="closeButton" onclick="exitPopup()">&times;</span>
+                <h2>לסיכום</h2>
+                <!-- כאן נכנסים פרטי הסיכום -->
+                <div id="formDetails"></div>
+                <div id="formButtons">
+                    <!-- כפתור אישור -->
+                    <label for="confirm" onclick="formSent()">
+                        <input type="button" id="confirm" value="נשמע טעים אש!">
+                    </label>
+                    <!-- כפתור עריכה -->
+                    <label for="edit" onclick="exitPopup()">
+                        <input type="button" id="edit" value="פחות קלעתם, רוצה לערוך">
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <!-- כותרת הדף -->
+        <h1 id="matchTitle">מה אוכלים היום? - התאם לי ארוחה</h1>
+        <br><br>
+        <!-- טקסט שדה חובה -->
+        <span id="matchRequiredField">זהו שדה חובה</span>
+
+        <!-- טופס -->
+        <form id="matchForm">
+            <!-- שדה שם -->
+            <label for="firstName" oninput="firstName()">
+                <span>כדי שנוכל להתאים עבורך את הארוחה, איך נקרא לך?</span>
+                <br><br>
+                <!-- תיבת טקסט לשם -->
+                <input
+                        type="text"
+                        id="firstName"
+                        placeholder="הקלד/י שם או כינוי 2 תווים לפחות"
+                        pattern="^[\u0590-\u05FF\s]+$"
+                        title="יש להזין שם פרטי או כינוי בעברית 2 תווים לפחות"
+                        required
+                        onabort="firstName()"
+                >
+            </label>
+
+            <br><br><br>
+
+            <!-- בחירת סגנון אוכל (רדיו) -->
+            <fieldset oninput="activeRadioChoice()">
+                <legend title="בחר/י את סגנון האוכל שלך">מה סגנון האוכל שלך?</legend><br>
+
+                <!-- רדיו: פסטות -->
+                <label for="pastaLover">
+                    <input type="radio" name="lifestyle" id="pastaLover" value="1 - חובב פסטות" required>
+                    חובב פסטות
+                    <br><br>
+                </label>
+
+                <!-- רדיו: אוכל בריא -->
+                <label for="healthyFood">
+                    <input type="radio" name="lifestyle" id="healthyFood" value="2 - אוכל בריא">
+                    אוכל בריא
+                    <br><br>
+                </label>
+
+                <!-- רדיו: קרניבור -->
+                <label for="carnivore">
+                    <input type="radio" name="lifestyle" id="carnivore" value="3 - קרניבור">
+                    קרניבור
+                    <br><br>
+                </label>
+
+                <!-- רדיו: צמחוני/טבעוני -->
+                <label for="veggieVegan">
+                    <input type="radio" name="lifestyle" id="veggieVegan" value="4 - צמחוני/טבעוני">
+                    צמחוני או טבעוני
+                    <br><br>
+                </label>
+
+                <!-- לפני בחירת הרדיו -->
+                <div id="matchMainImageContainer">
+                    <img src="styles/images/askmark.png" id="matchMainImage" title="בחר סגנון אוכל" alt="סימן שאלה">
+                </div>
+
+            </fieldset>
+
+            <br><br><br>
+
+            <!-- בחירת מה קורץ היום (צ'קבוקסים) -->
+            <fieldset oninput="activeCheckboxChoices()">
+                <legend title="בחר/י מה הכי קורץ לך היום">מה הכי קורץ לך היום?</legend><br>
+
+                <!-- צ'קבוקס: מסעדות שף -->
+                <label for="chefRestaurants">
+                    <input type="checkbox" name="mostInterested" id="chefRestaurants" value="1 - מסעדות שף">
+                    מסעדות שף
+                    <br><br>
+                </label>
+
+                <!-- צ'קבוקס: אוכל רחוב -->
+                <label for="streetFood">
+                    <input type="checkbox" name="mostInterested" id="streetFood" value="2 - אוכל רחוב">
+                    אוכל רחוב
+                    <br><br>
+                </label>
+
+                <!-- צ'קבוקס: קינוחים -->
+                <label for="decadentDesserts">
+                    <input type="checkbox" name="mostInterested" id="decadentDesserts" value="3 - קינוחים מושחתים">
+                    קינוחים מושחתים
+                    <br><br>
+                </label>
+
+                <!-- צ'קבוקס: אוכל ביתי -->
+                <label for="comfortFood">
+                    <input type="checkbox" name="mostInterested" id="comfortFood" value="4 - אוכל ביתי ומנחם">
+                    אוכל ביתי ומנחם
+                    <br><br>
+                </label>
+            </fieldset>
+
+            <!-- כפתור הפעלת ההתאמה -->
+            <label for="match" onclick="showSummaryPopup()">
+                <br><br>
+                <input type="button" id="match" value="התאם לי את הארוחה" disabled>
+            </label>
+        </form>
+
+        <!-- גלריית תמונות קטנות (צ'קבוקסים) -->
+        <div id="matchMainImagesContainer">
+            <!-- מסעדות שף -->
+            <img src="styles/images/chef-steak.png" title="סטייק" class="matchMainImagesChef" alt="סטייק על צלחת" />
+            <img src="styles/images/chef-pasta.jpg" title="פסטת שמנת כמהין" class="matchMainImagesChef" alt="פסטת שמנת כמהין" />
+            <img src="styles/images/chef-fish.jpg" title="דג יווני" class="matchMainImagesChef" alt="דג יווני" />
+
+            <!-- אוכל רחוב -->
+            <img src="styles/images/street-shawarma.jpg" title="שווארמה" class="matchMainImagesStreet" alt="לאפה שווארמה" />
+            <img src="styles/images/street-burger.jpg" title="המבורגר" class="matchMainImagesStreet" alt="המבורגר " />
+            <img src="styles/images/street-falafel.jpg" title="פלאפל" class="matchMainImagesStreet" alt="פלאפל" />
+
+            <!-- קינוחים -->
+            <img src="styles/images/dessert-cheesecake.jpg" title="עוגת גבינה" class="matchMainImagesDesserts" alt="עוגת גבינה" />
+            <img src="styles/images/dessert-chocolate.jpg" title="מוס שוקולד" class="matchMainImagesDesserts" alt="מוס שוקולד" />
+            <img src="styles/images/dessert-chocolatefruits.jpg" title="פירות עם שוקולד(פונדו)" class="matchMainImagesDesserts" alt="פירות עם שוקולד" />
+
+            <!-- אוכל ביתי -->
+            <img src="styles/images/comfort-soup.jpg" title="מרק קובה ביתי" class="matchMainImagesComfort" alt="קערת מרק" />
+            <img src="styles/images/comfort-rice.jpg" title="תבשיל מגדרה טבעוני" class="matchMainImagesComfort" alt="תבשיל מגדרה" />
+            <img src="styles/images/comfort-meatballs.jpeg" title="קציצות ברוטב" class="matchMainImagesComfort" alt="קציצות ברוטב" />
+        </div>
+
+        <br><br><br><br><br>
+    </main>
+</div>
+</body>
+</html>

@@ -1,0 +1,226 @@
+﻿/* ===== בסיס כללי ===== */
+* { box-sizing: border-box; }
+html, body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, "Segoe UI", Tahoma, sans-serif;
+    direction: rtl;
+    height: 100%;
+}
+
+/* רקע הדף */
+body {
+    background-image: url("images/cherry.jpg");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.45);
+    z-index: 0;
+}
+
+/* מיכל מרכזי */
+#container {
+    width: 92%;
+    max-width: 780px;
+    margin: 40px auto;
+    padding: 24px;
+    background: rgba(255,255,255,0.9);
+    border-radius: 14px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+    position: relative;
+    z-index: 1;
+}
+
+/* כותרות */
+h1, h2, legend {
+    text-align: center;
+    margin: 0;
+    color: #1f2937;
+}
+h1 { font-size: 1.8rem; margin-bottom: 8px; }
+h2 { font-size: 1.3rem; }
+
+/* טקסט עזר */
+#matchRequiredField {
+    display: inline-block;
+    color: #d62d20;
+    font-size: 0.95rem;
+    margin: 6px 0 16px;
+}
+
+/* ===== טופס ===== */
+#matchForm { margin-top: 10px; }
+
+label span {
+    display: inline-block;
+    font-weight: 600;
+    color: #374151;
+    margin-bottom: 6px;
+}
+
+/* תיבת טקסט */
+input[type="text"] {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #d1d5db;
+    border-radius: 10px;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color .2s, box-shadow .2s;
+}
+input[type="text"]:focus {
+    border-color: #10b981;
+    box-shadow: 0 0 0 3px rgba(16,185,129,0.15);
+}
+
+/* קבוצות שדות */
+fieldset {
+    background: #fafbff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 14px 16px 10px;
+    margin: 14px 0 10px;
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+}
+fieldset .options { flex: 1; }
+fieldset label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 600;
+    color: #374151;
+}
+
+/* ===== תצוגת תמונה לפי בחירת הרדיו ===== */
+#matchMainImageContainer {
+    order: -1;
+    width: 160px;    
+    height: 160px;    
+    border: 2px solid #e5e7eb;
+    border-radius: 12px;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden; 
+}
+#matchMainImage {
+    width: 100%;     
+    height: 100%;    
+    object-fit: cover; 
+    border-radius: 0; 
+    opacity: 1 !important;
+}
+
+/* רדיו/צ'קבוקס */
+input[type="radio"], input[type="checkbox"] {
+    transform: scale(1.1);
+    margin-left: 8px;
+}
+
+
+fieldset#foodStyle label img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 10px;
+    vertical-align: middle;
+    margin-right: 6px;
+}
+
+/* ===== כפתורים ===== */
+input[type="button"] {
+    padding: 12px 18px;
+    margin: 8px 6px;
+    border: none;
+    border-radius: 10px;
+    background: #10b981;
+    color: #fff;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: transform .06s, filter .2s, background .2s;
+}
+input[type="button"]:hover:enabled { filter: brightness(0.95); }
+input[type="button"]:active:enabled { transform: translateY(1px); }
+input[type="button"]:disabled {
+    background: #cbd5e1;
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+/* ===== גלריית תמונות קטנות (צ'קבוקסים) ===== */
+#matchMainImagesContainer {
+    margin-top: 14px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+#matchMainImagesContainer img {
+    width: 110px;
+    height: 84px;
+    object-fit: cover;
+    border-radius: 10px;
+    opacity: .35; 
+    transition: opacity .25s, transform .08s;
+}
+#matchMainImagesContainer img:hover {
+    transform: translateY(-1px);
+    opacity: .75; 
+}
+
+/* ===== פופ־אפ סיכום ===== */
+#matchSummaryFormContainer {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.65);
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+}
+#formContent {
+    width: min(92%, 560px);
+    background: #fff;
+    border-radius: 14px;
+    padding: 24px;
+    box-shadow: 0 10px 26px rgba(0,0,0,0.3);
+    position: relative;
+}
+#closeButton {
+    position: absolute;
+    top: 10px;
+    left: 14px;
+    font-size: 28px;
+    color: #6b7280;
+    cursor: pointer;
+    user-select: none;
+    transition: color .2s;
+}
+#closeButton:hover { color: #000; }
+#formDetails {
+    margin: 12px 0 14px;
+    line-height: 1.7;
+    color: #111827;
+}
+
+
+@media (max-width: 540px) {
+    fieldset { flex-direction: column; }
+    #matchMainImageContainer {
+        width: 100%;
+        height: 180px; 
+    }
+}
+@media (max-width: 480px) {
+    #container { padding: 16px; }
+    fieldset { padding: 12px; }
+    input[type="button"] { width: 100%; }
+    #formContent { padding: 18px; }
+}
